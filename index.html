@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mandarin Leap</title>
+  <meta name="theme-color" content="#357ABD"/>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class', // Enable class-based dark mode
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              light: '#4A90E2', // Light mode primary
+              DEFAULT: '#357ABD', // Default/Dark mode primary
+              dark: '#2A5C8C',  // Darker shade for hover/active
+            },
+            secondary: {
+              light: '#F39C12',
+              DEFAULT: '#E67E22',
+              dark: '#D35400',
+            },
+            background: {
+              light: '#F7FAFC',
+              dark: '#1A202C',
+            },
+            text: {
+              light: '#2D3748',
+              dark: '#E2E8F0',
+            },
+            card: {
+              light: '#FFFFFF',
+              dark: '#2D3748',
+            },
+            border: {
+              light: '#E2E8F0',
+              dark: '#4A5568',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style>
+  /* Styles for react-transition-group CSSTransition */
+  .exercise-transition-enter {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  .exercise-transition-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms ease-out, transform 300ms ease-out;
+  }
+  .exercise-transition-exit {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .exercise-transition-exit-active {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 300ms ease-in, transform 300ms ease-in;
+  }
+
+  /* Styles for flashcard item transition (card to card) */
+  .flashcard-item-transition-enter {
+    opacity: 0;
+    transform: translateX(40px); /* Slide in from right */
+  }
+  .flashcard-item-transition-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 350ms ease-out, transform 350ms ease-out;
+  }
+  .flashcard-item-transition-exit {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .flashcard-item-transition-exit-active {
+    opacity: 0;
+    transform: translateX(-40px); /* Slide out to left */
+    transition: opacity 350ms ease-in, transform 350ms ease-in;
+  }
+
+  /* Styles for flashcard flip animation (reveal) */
+  .perspective { perspective: 1000px; }
+  .preserve-3d { transform-style: preserve-3d; }
+  .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .rotate-y-180 { transform: rotateY(180deg); }
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.6.2",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.6.0",
+    "react-transition-group": "https://esm.sh/react-transition-group@^4.4.5",
+    "react-transition-group/": "https://esm.sh/react-transition-group@^4.4.5/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-colors duration-300">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(registration => {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          })
+          .catch(error => {
+            console.log('ServiceWorker registration failed: ', error);
+          });
+      });
+    }
+  </script>
+</body>
+</html>
