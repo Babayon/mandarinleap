@@ -8,7 +8,7 @@
   # A pasta que o comando acima gera com o site final.
   # Para Create React App é 'build'. Para Vite é 'dist'.
   # Verifique qual pasta é criada quando você roda o build localmente.
-  publish = "build"
+  publish = "dist"
 
 # Esta regra é VITAL para aplicações React (Single Page Applications).
 # Ela garante que todas as rotas (ex: /vocabulary/HSK1) funcionem
